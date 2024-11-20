@@ -9,14 +9,21 @@ exports.consolidarFaixas = (renda) => {
     const rendas = renda.split(',').map((item) => item.trim());
 
     const contagem = {};
+    const naoIdentificados = [];
 
     rendas.forEach((renda) => {
         const faixa = getFaixaRenda(renda);
-        contagem[faixa] = (contagem[faixa] || 0) + 1;
+        if (faixa === "não identificado") {
+            naoIdentificados.push(renda); // Adiciona o valor bruto que não foi identificado
+        } else {
+            contagem[faixa] = (contagem[faixa] || 0) + 1; // Incrementa a contagem das faixas identificadas
+        }
     });
 
-    return Object.entries(contagem).map(([faixa, quantidade]) => ({
+    const resultado = Object.entries(contagem).map(([faixa, quantidade]) => ({
         faixa,
         quantidade
     }));
+
+    return { resultado, naoIdentificados };
 };
