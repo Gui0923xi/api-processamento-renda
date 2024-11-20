@@ -13,7 +13,8 @@ app.use(bodyParser.json({ limit: '30mb' })); // Limite ajustado para 30MB
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 // Rotas
-app.use('/renda', require('./src/routes/renda'));
+app.use('/renda', require('./src/routes/renda')); // Rota existente
+app.use('/analise', require('./src/routes/analise')); // Nova rota adicionada
 
 // Iniciar o servidor
 app.listen(PORT, () => {
