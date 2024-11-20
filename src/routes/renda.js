@@ -7,8 +7,8 @@ router.post('/padronizar', (req, res) => {
     if (!renda) {
         return res.status(400).json({ error: 'Renda é obrigatória.' });
     }
-    const rendaPadronizada = padronizarRenda(renda);
-    res.json({ rendaOriginal: renda, rendaPadronizada });
+    const resultado = padronizarRenda(renda);
+    res.json(resultado);
 });
 
 module.exports = router;
