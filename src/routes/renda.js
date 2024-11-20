@@ -6,8 +6,8 @@ router.post('/padronizar', (req, res) => {
     try {
         const { renda } = req.body;
 
-        if (!renda || !Array.isArray(renda)) {
-            return res.status(400).json({ error: "O campo 'renda' é obrigatório e deve ser um array." });
+        if (!renda || typeof renda !== "string") {
+            return res.status(400).json({ error: "O campo 'renda' é obrigatório e deve ser uma string separada por vírgulas." });
         }
 
         const resultado = consolidarFaixas(renda);
