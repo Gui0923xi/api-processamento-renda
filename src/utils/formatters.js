@@ -5,7 +5,7 @@ exports.getFaixaRenda = (renda) => {
 
     // Regras específicas para faixas desejadas e faixas erradas
     if (
-        /^até r\$2\.800$|^até_r\$2\.800$|^menor_que_r\$2\.800$|^00 a r\$ 2\.000$|^00 a r\$ 2\.400$|^00 a r\$ 2\.800$|^até r\$ 1\.600$|^até_r\$2\.400$|^de r\$ 1\.601$|^de r\$ 2\.001$|^de r\$ 2\.801$|^renda av\.\s?=\s?r\$2\.350$|^r\$1\s?000$|^até r\$2\.000$|^entre_r\$2\.400_e_r\$2\.800$/.test(renda)
+        /^até r\$2\.800$|^até_r\$2\.800$|^menor_que_r\$2\.800$|^00 a r\$ 2\.000$|^00 a r\$ 2\.400$|^00 a r\$ 2\.800$|^até r\$ 1\.600$|^até_r\$2\.400$|^de r\$ 1\.601$|^de r\$ 2\.001$|^de r\$ 2\.801$|^renda av\.\s?=\s?r\$2\.350$|^r\$1\s?000$|^até r\$2\.000$|^entre_r\$2\.400_e_r\$2\.800$|^0$|^1\.100$|^1500\.00$|^até r\$ 2\.300$|^até r\$1\.400$|^menor que r\$2\.800$|^menor_que_r\$2\.000$|^r\$ 1\.400$|^r\$1601 a 2000$/.test(renda)
     ) {
         return "Abaixo de R$2.800";
     }
@@ -17,13 +17,13 @@ exports.getFaixaRenda = (renda) => {
     }
 
     if (
-        /^de r\$3\.201$|^entre r\$3\.201 e r\$3\.600$|^r\$3\.201_a_r\$3\.600$|^de r\$ 3\.601$|^menor_que_r\$3\.600$|^r\$3\.200_a_r\$3\.600$|^entre_r\$3\.200_e_r\$3\.600$|^entre_r\$3\.201_e_r\$3\.600$/.test(renda)
+        /^de r\$3\.201$|^entre r\$3\.201 e r\$3\.600$|^r\$3\.201_a_r\$3\.600$|^de r\$ 3\.601$|^menor_que_r\$3\.600$|^r\$3\.200_a_r\$3\.600$|^entre_r\$3\.200_e_r\$3\.600$|^entre_r\$3\.201_e_r\$3\.600$|^r\$2\.801_a_r\$3\.600$|^r\$3\.201 a r\$3\.600$/.test(renda)
     ) {
         return "R$3.201 a R$3.600";
     }
 
     if (
-        /^entre r\$3\.601 e r\$4\.000$|^r\$3\.601_a_r\$4\.000$|^de r\$3\.200 a r\$4\.000$|^00 a r\$ 4\.000$|^maior que r\$3\.600$|^acima_de_r\$3\.600$|^maior_que_r\$3\.600$/.test(renda)
+        /^entre r\$3\.601 e r\$4\.000$|^r\$3\.601_a_r\$4\.000$|^de r\$3\.200 a r\$4\.000$|^00 a r\$ 4\.000$|^maior que r\$3\.600$|^acima_de_r\$3\.600$|^maior_que_r\$3\.600$|^r\$3\.601 a r\$4\.000$/.test(renda)
     ) {
         return "R$3.601 a R$4.000";
     }
@@ -35,13 +35,13 @@ exports.getFaixaRenda = (renda) => {
     }
 
     if (
-        /^r\$4\.401_a_r\$4\.800$|^maior_que_r\$4\.800$/.test(renda)
+        /^r\$4\.401_a_r\$4\.800$|^maior_que_r\$4\.800$|^entre_r\$3\.500_e_r\$5\.000$/.test(renda)
     ) {
         return "R$4.500 a R$5.000";
     }
 
     if (
-        /^maior_que_r\$6\.000$|^r\$5\.001_a_r\$6\.000$|^acima de r\$5\.000$/.test(renda)
+        /^maior_que_r\$6\.000$|^r\$5\.001_a_r\$6\.000$|^acima de r\$5\.000$|^acima de r\$ 4\.400$|^maior que r\$4\.800$|^maior_que_r\$9000$/.test(renda)
     ) {
         return "Acima de R$5.000";
     }
