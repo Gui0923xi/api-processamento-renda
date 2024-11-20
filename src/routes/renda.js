@@ -11,8 +11,8 @@ router.post('/padronizar', (req, res) => {
         }
 
         const { resultado, naoIdentificados } = consolidarFaixas(renda);
-        res.json({ 
-            resultado, 
+        res.json({
+            resultado,
             naoIdentificados: naoIdentificados.length ? { total: naoIdentificados.length, valores: naoIdentificados } : null
         });
     } catch (error) {
