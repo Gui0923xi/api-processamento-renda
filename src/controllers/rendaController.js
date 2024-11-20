@@ -1,14 +1,15 @@
-const { formatarRenda, getNaoIdentificados } = require('../utils/formatters');
+const { getFaixaRenda } = require('../utils/formatters');
 
-exports.padronizarRenda = (renda) => {
-    if (!renda) return { error: "Renda é obrigatória." };
+exports.consolidarFaixas = (rendas) => {
+    const contagem = {};
 
-    const rendas = renda.split(',').map((item) => item.trim());
-    const rendasPadronizadas = rendas.map(formatarRenda);
+    rendas.forEach((renda) => {
+        const faixa = getFaixaRenda(renda);
+        contagem[faixa] = (contagem[faixa] || 0) + 1;
+    });
 
-    return {
-        rendaOriginal: rendas,
-        rendasPadronizadas,
-        naoIdentificados: getNaoIdentificados()
-    };
+    return Object.entries(contagem).map(([faixa, quantidade]) => ({
+        faixa,
+        quantidade
+    }));
 };
