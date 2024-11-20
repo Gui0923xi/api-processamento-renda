@@ -1,13 +1,10 @@
-// Lista para armazenar os padrões não identificados
-const naoIdentificados = [];
-
-exports.formatarRenda = (renda) => {
+exports.getFaixaRenda = (renda) => {
     if (!renda) return "não identificado";
 
     renda = renda.trim().toLowerCase();
 
-    // Regras específicas para formatações conhecidas
-    if (/^até r\$2\.800$|^até_r\$2\.800$/.test(renda)) {
+    // Regras específicas para faixas
+    if (/^até r\$2\.800$|^até_r\$2\.800$|^menor_que_r\$2\.800$/.test(renda)) {
         return "Abaixo de R$2.800";
     }
 
@@ -35,15 +32,5 @@ exports.formatarRenda = (renda) => {
         return "Acima de R$5.000";
     }
 
-    if (/^menor_que_r\$2\.800$/.test(renda)) {
-        return "Abaixo de R$2.800";
-    }
-
-    // Caso nenhum padrão seja identificado
-    naoIdentificados.push(renda);
-    console.log(`[Não identificado]: ${renda}`);
     return "não identificado";
 };
-
-// Exportar a lista de não identificados para o controller
-exports.getNaoIdentificados = () => naoIdentificados;
