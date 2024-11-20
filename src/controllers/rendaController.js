@@ -14,9 +14,9 @@ exports.consolidarFaixas = (renda) => {
     rendas.forEach((renda) => {
         const faixa = getFaixaRenda(renda);
         if (faixa === "não identificado") {
-            naoIdentificados.push(renda); // Adiciona o valor bruto que não foi identificado
+            naoIdentificados.push(renda); // Adiciona ao array de não identificados
         } else {
-            contagem[faixa] = (contagem[faixa] || 0) + 1; // Incrementa a contagem das faixas identificadas
+            contagem[faixa] = (contagem[faixa] || 0) + 1; // Incrementa a contagem das faixas
         }
     });
 
