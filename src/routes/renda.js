@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const { padronizarRenda } = require('../controllers/rendaController');
 
 router.post('/padronizar', (req, res) => {
     const renda = req.body.renda;
-    // Exemplo de padronização simples
-    const rendaPadronizada = renda.toLowerCase().replace(/[^0-9]/g, '');
+    if (!renda) {
+        return res.status(400).json({ error: 'Renda é obrigatória.' });
+    }
+    const rendaPadronizada = padronizarRenda(renda);
     res.json({ rendaOriginal: renda, rendaPadronizada });
 });
 
