@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -8,7 +7,10 @@ const PORT = process.env.PORT || 3000;
 
 // Middlewares
 app.use(cors());
-app.use(bodyParser.json());
+
+// Aumentar limite do body-parser para 30MB
+app.use(bodyParser.json({ limit: '30mb' })); // Limite ajustado para 30MB
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 // Rotas
 app.use('/renda', require('./src/routes/renda'));
