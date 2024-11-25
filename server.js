@@ -1,22 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const rendaRoutes = require('./src/routes/renda');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Middlewares
 app.use(cors());
-
-// Aumentar limite do body-parser para 30MB
-app.use(bodyParser.json({ limit: '30mb' })); // Limite ajustado para 30MB
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
+app.use(bodyParser.json());
 
 // Rotas
-app.use('/renda', require('./src/routes/renda')); // Rota existente
-app.use('/analise', require('./src/routes/analise')); // Nova rota adicionada
+app.use('/api', rendaRoutes);
 
-// Iniciar o servidor
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
