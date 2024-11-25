@@ -11,3 +11,12 @@ const pool = mysql.createPool({
 });
 
 module.exports = pool;
+
+pool.getConnection((err, connection) => {
+    if (err) {
+        console.error("Erro ao conectar no banco de dados:", err.message);
+    } else {
+        console.log("Conexão com o banco de dados bem-sucedida!");
+        connection.release();
+    }
+});
