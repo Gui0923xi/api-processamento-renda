@@ -1,6 +1,6 @@
-const { getFaixaRenda } = require('../utils/formatters');
+const pool = require('../config/db'); // Importa a conexão com o banco de dados
+const { getFaixaRenda } = require('../utils/formatters'); // Função para padronizar as rendas
 
-// Controlador para atualizar as rendas diretamente no banco
 exports.atualizarRendas = async (req, res) => {
     try {
         const { dados } = req.body;
@@ -9,21 +9,32 @@ exports.atualizarRendas = async (req, res) => {
             return res.status(400).json({ error: "O campo 'dados' é obrigatório e deve ser um array." });
         }
 
-        // Processar os dados para atualização
-        const dadosAtualizados = dados.map((item) => {
-            const faixaCorrigida = getFaixaRenda(item.renda); // Processa a faixa de renda
-            return {
-                ...item,
-                renda: faixaCorrigida // Atualiza a renda corrigida diretamente
-            };
+        // Processar cada item na lista de dados
+        const dadosAtualizados = await Promise.all(
+            dados.map(async (item) => {
+                const faixaCorrigida = getFaixaRenda(item.renda); // Processa a renda
+
+                // Atualiza no banco de dados
+                const [result] = await pool.query(
+                    "UPDATE tabela_renda SET renda = ? WHERE id = ?",
+                    [faixaCorrigida, item.id]
+                );
+
+                return {
+                    id: item.id,
+                    renda: faixaCorrigida,
+                    alterado: result.affectedRows > 0 // Confirma se foi alterado no banco
+                };
+            })
+        );
+
+        // Retorna os dados atualizados como resposta
+        res.json({
+            sucesso: true,
+            dados: dadosAtualizados
         });
-
-        // Aqui você pode implementar a lógica para salvar no banco (exemplo abaixo)
-        console.log("Dados atualizados no banco:", dadosAtualizados);
-
-        res.json({ sucesso: true, dados: dadosAtualizados });
     } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ error: "Erro interno no servidor." });
+        console.error("Erro ao atualizar rendas:", error.message);
+        res.status(500).json({ error: "Erro interno no servidor. Verifique os logs para mais detalhes." });
     }
 };
