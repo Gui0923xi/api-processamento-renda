@@ -18,3 +18,6 @@ app.listen(PORT, () => {
 });
 const rendaUpdateRoutes = require('./src/routes/rendaUpdate');
 app.use('/api', rendaUpdateRoutes);
+
+const dbTestRoutes = require('./src/routes/dbTest');
+app.use('/api', dbTestRoutes);
