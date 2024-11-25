@@ -3,6 +3,7 @@ exports.getFaixaRenda = (renda) => {
 
     renda = renda.trim().toLowerCase();
 
+    // Regras específicas para faixas desejadas
     if (
         /^até r\$2\.800$|^até_r\$2\.800$|^menor_que_r\$2\.800$|^00 a r\$ 2\.000$|^00 a r\$ 2\.400$|^00 a r\$ 2\.800$|^até r\$ 1\.600$|^até_r\$2\.400$|^de r\$ 1\.601$|^de r\$ 2\.001$|^de r\$ 2\.801$|^renda av\.\s?=\s?r\$2\.350$|^r\$1\s?000$|^até r\$2\.000$|^entre_r\$2\.400_e_r\$2\.800$|^0$|^1\.100$|^1500\.00$|^até r\$ 2\.300$|^até r\$1\.400$|^menor que r\$2\.800$|^menor_que_r\$2\.000$|^r\$ 1\.400$|^r\$1601 a 2000$/.test(renda)
     ) {
